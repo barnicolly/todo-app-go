@@ -9,6 +9,7 @@ type TodoItem interface {
 	Create(item todo.TodoItem) (int, error)
 	GetAll() ([]todo.TodoItem, error)
 	GetById(itemId int) (todo.TodoItem, error)
+	Delete(itemId int) error
 }
 
 type Repository struct {

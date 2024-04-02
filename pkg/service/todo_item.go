@@ -24,3 +24,7 @@ func (s *TodoItemService) GetAll() ([]todo.TodoItem, error) {
 func (s *TodoItemService) GetById(itemId int) (todo.TodoItem, error) {
 	return s.repo.GetById(itemId)
 }
+
+func (s *TodoItemService) Delete(itemId int) error {
+	return s.repo.Delete(itemId)
+}

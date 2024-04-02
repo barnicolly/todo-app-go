@@ -53,3 +53,9 @@ func (r *TodoItemPostgres) GetById(itemId int) (todo.TodoItem, error) {
 
 	return item, nil
 }
+
+func (r *TodoItemPostgres) Delete(itemId int) error {
+	query := fmt.Sprintf(`DELETE FROM %s WHERE id = $1`, todoItemsTable)
+	_, err := r.db.Exec(query, itemId)
+	return err
+}

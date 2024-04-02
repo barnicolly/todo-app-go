@@ -9,6 +9,7 @@ type TodoItem interface {
 	Create(item todo.TodoItem) (int, error)
 	GetAll() ([]todo.TodoItem, error)
 	GetById(itemId int) (todo.TodoItem, error)
+	Delete(itemId int) error
 }
 
 type Service struct {
@@ -17,6 +18,6 @@ type Service struct {
 
 func NewService(repos *repository.Repository) *Service {
 	return &Service{
-		TodoItem:      NewTodoItemService(repos.TodoItem),
+		TodoItem: NewTodoItemService(repos.TodoItem),
 	}
 }
