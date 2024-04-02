@@ -10,6 +10,7 @@ type TodoItem interface {
 	GetAll() ([]todo.TodoItem, error)
 	GetById(itemId int) (todo.TodoItem, error)
 	Delete(itemId int) error
+	Update(itemId int, input todo.UpdateItemInput) error
 }
 
 type Service struct {
