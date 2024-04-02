@@ -1,14 +1,14 @@
 package repository
 
-type TodoItem interface {
+import "github.com/jmoiron/sqlx"
 
+type TodoItem interface {
 }
 
 type Repository struct {
 	TodoItem
 }
 
-func NewRepository() *Repository {
+func NewRepository(db *sqlx.DB) *Repository {
 	return &Repository{}
 }
-

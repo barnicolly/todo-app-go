@@ -1,12 +1,15 @@
 package main
 
 import (
-	"github.com/spf13/viper"
 	"log"
 	"todo-app-go"
 	"todo-app-go/pkg/handler"
 	"todo-app-go/pkg/repository"
 	"todo-app-go/pkg/service"
+
+	_ "github.com/lib/pq"
+
+	"github.com/spf13/viper"
 )
 
 func main() {
@@ -14,7 +17,19 @@ func main() {
 		log.Fatalf("error initializing configs: %s", err.Error())
 	}
 
-	repos := repository.NewRepository()
+	db, err := repository.NewPostgresDB(repository.Config{
+		Host:     "localhost",
+		Port:     "5436",
+		Username: "postgres",
+		Password: "qwerty",
+		DBName:   "postgres",
+		SSLMode:  "disable",
+	})
+	if err != nil {
+		log.Fatalf("failed to initialize db: %s", err.Error())
+	}
+
+	repos := repository.NewRepository(db)
 	services := service.NewService(repos)
 	handlers := handler.NewHandler(services)
 
